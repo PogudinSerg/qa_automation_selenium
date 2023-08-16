@@ -1,7 +1,8 @@
 import pytest
 from selenium import webdriver
-from selenium.webdriver.common.by import By
+import time
 from selenium.webdriver.chrome.options import Options
+from .pages.login_page import LoginPage
 
 
 def pytest_addoption(parser):
@@ -18,3 +19,5 @@ def browser(request):
     yield browser
     print("\nquit browser..")
     browser.quit()
+
+
