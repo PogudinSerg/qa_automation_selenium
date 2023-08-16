@@ -29,7 +29,7 @@ class TestUserAddToBasketFromProductPage():
         link = "http://selenium1py.pythonanywhere.com/catalogue/coders-at-work_207/"
         page = ProductPage(browser, link)
         page.open()
-        page.no_success_message()
+        page.no_success_message_appeared()
 
 
 @pytest.mark.need_review
