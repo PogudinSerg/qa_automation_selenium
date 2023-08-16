@@ -16,11 +16,47 @@ from pages.product_page import ProductPage
     "http://selenium1py.pythonanywhere.com/catalogue/coders-at-work_207/?promo=offer9"
 ])
 def test_guest_can_add_product_to_basket(browser, link):
-    # promo = "?promo=newYear"
-    # link = f"http://selenium1py.pythonanywhere.com/catalogue/coders-at-work_207/{promo}"
     page = ProductPage(browser, link)
     page.open()
     page.click_add_to_basket_button()
     page.solve_quiz_and_get_code()
     assert page.get_item_name() == page.get_basket_item_name(), "Wrong item name was added into basket"
     assert page.get_item_price() == page.get_basket_price(), "Wrong item price"
+
+
+def test_guest_cant_see_success_message_after_adding_product_to_basket(browser):
+    link = "http://selenium1py.pythonanywhere.com/catalogue/coders-at-work_207/"
+    page = ProductPage(browser, link)
+    page.open()
+    page.click_add_to_basket_button()
+    assert page.no_success_message() is False, "Success message appeared, but shouldn't"
+    print("test")
+
+
+def test_guest_cant_see_success_message(browser):
+    link = "http://selenium1py.pythonanywhere.com/catalogue/coders-at-work_207/"
+    page = ProductPage(browser, link)
+    page.open()
+    assert page.no_success_message() is False, "Success message appeared, but shouldn't"
+
+
+def test_message_disappeared_after_adding_product_to_basket(browser):
+    link = "http://selenium1py.pythonanywhere.com/catalogue/coders-at-work_207/"
+    page = ProductPage(browser, link)
+    page.open()
+    page.click_add_to_basket_button()
+    assert page.success_message_is_disappeared() is True, "Success message disappeared"
+
+
+def test_guest_should_see_login_link_on_product_page(browser):
+    link = "http://selenium1py.pythonanywhere.com/en-gb/catalogue/the-city-and-the-stars_95/"
+    page = ProductPage(browser, link)
+    page.open()
+    page.should_be_login_link()
+
+
+def test_guest_can_go_to_login_page_from_product_page(browser):
+    link = "http://selenium1py.pythonanywhere.com/en-gb/catalogue/the-city-and-the-stars_95/"
+    page = ProductPage(browser, link)
+    page.open()
+    page.go_to_login_page()

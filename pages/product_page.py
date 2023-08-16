@@ -22,3 +22,11 @@ class ProductPage(BasePage):
     def get_basket_price(self):
         basket_price = self.browser.find_element(*ProductPageLocators.BASKET_PRICE).text
         return basket_price
+
+    def no_success_message(self):
+        result = self.is_element_present(*ProductPageLocators.FIRST_INNER_MESSAGE)
+        return result
+
+    def success_message_is_disappeared(self):
+        result = self.is_disappeared(*ProductPageLocators.FIRST_INNER_MESSAGE)
+        return result
